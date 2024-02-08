@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onedir --windowed --add-data "c:\python\python37\lib\site-packages/customtkinter;customtkinter/" -F -w -i "C:\Users\M\Desktop\numerical_project\favicon2.ico" "C:\Users\M\Desktop\numerical_project\guinew22.py"
