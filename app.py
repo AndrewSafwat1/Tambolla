@@ -9,6 +9,8 @@ import threading
 
 class App():
     def __init__(self, root):
+        self.fontSize = 20
+        self.giantFont = customtkinter.CTkFont(family='Poppins Light', weight='bold', size=self.fontSize)
         self.toggle = False
         self.frame1 = Frame(root, bg=darkColor)
         self.frame1.pack(fill=tkinter.X)
@@ -28,7 +30,7 @@ class App():
                                                     font=importantFont)
         self.appearanceButton.pack(side=tk.BOTTOM, expand=True, padx=20, pady=20)
 
-        self.label = customtkinter.CTkLabel(self.frame2, text="", fg_color="transparent", height=300, font = giantFont)
+        self.label = customtkinter.CTkLabel(self.frame2, text="", fg_color="transparent", height=300, font = self.giantFont)
         self.label.pack(side=tk.TOP, expand=True, padx=20, pady=20, fill=tkinter.BOTH)
 
     def submit(self):
@@ -37,6 +39,7 @@ class App():
         except:
             return CTkMessagebox(title="Error", message="Enter a numeric value", icon="cancel", font=importantFont2)
         if (self.rangeEntry.get() != None and int(self.rangeEntry.get()) > 0):
+            self.fontSize = 20
             self.counter = 0
             self.set_interval(0.05)
         else:
@@ -54,7 +57,12 @@ class App():
         return self.t
     
     def changeNumber(self):
+        if(self.fontSize < 220):
+            self.fontSize += 4
+        self.giantFont.configure(size = self.fontSize)
+        self.label.configure(font = self.giantFont)
         self.label.configure(text = str(random.randint(1, int(self.rangeEntry.get()))))
+        
 
     def changeMode(self):
         if(self.toggle):
@@ -82,7 +90,6 @@ lightColor = "#ebebeb"
 myFont = customtkinter.CTkFont(family='Poppins Light', weight='normal', size=15)
 importantFont = customtkinter.CTkFont(family='Poppins Light', weight='bold', size=20)
 importantFont2 = customtkinter.CTkFont(family='Poppins Light', weight='bold', size=20)
-giantFont = customtkinter.CTkFont(family='Poppins Light', weight='bold', size=220)
 
 app =App(root)
 
